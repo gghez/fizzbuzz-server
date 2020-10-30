@@ -7,22 +7,22 @@ import (
 )
 
 var (
-	callHistory map[Payload]int
+	callHistory map[fizzBuzzParams]int
 )
 
 func init() {
-	callHistory = make(map[Payload]int)
+	callHistory = make(map[fizzBuzzParams]int)
 }
 
 type statsResponse struct {
-	Payload Payload `json:"parameters"`
-	Calls   int     `json:"calls"`
+	Payload fizzBuzzParams `json:"parameters"`
+	Calls   int            `json:"calls"`
 }
 
-// HandleStatS handles stats requests
+// HandleStats handles stats requests
 func HandleStats(w http.ResponseWriter) {
 	max := -1
-	var mostFrequent Payload
+	var mostFrequent fizzBuzzParams
 	for p, c := range callHistory {
 		if c > max {
 			max = c
@@ -34,6 +34,7 @@ func HandleStats(w http.ResponseWriter) {
 
 	data, err := json.Marshal(resp)
 	if err != nil {
+		// silent server errors to client
 		log.Printf("failed to marshal response: %v", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
