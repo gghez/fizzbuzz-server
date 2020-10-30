@@ -2,6 +2,8 @@
 
 Go mod barely used here, mostly for IDE configuration (Goland). May be useful when a project grows.
 
+Run the project with `go run cmd/main.go`
+
 ## Project structure
 
 **cmd/** : HTTP server entrypoint
